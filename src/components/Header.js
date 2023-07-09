@@ -1,8 +1,9 @@
+import React from 'react'
 
 const Header = () => {
     return(
-        <div>
-            <h1>This is our header</h1>
+        <div className="app-header">
+            <h1>Notes List</h1>
         </div>
     )
 }
