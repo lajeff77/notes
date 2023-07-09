@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 // import notes from '../assets/data'
 import ListItem from '../components/ListItem'
+import AddButton from '../components/AddButton'
 
 const NotesPage = () => {
     let [notes, setNotes] = useState([])
@@ -9,7 +10,7 @@ const NotesPage = () => {
     }, []) //this one only fires onload
 
     let getNotes = async () => {
-        let response = await fetch('http://localhost:5000/notes')
+        let response = await fetch('http://localhost:3001/notes')
         let data = await response.json()
         setNotes(data)
     }
@@ -25,6 +26,7 @@ const NotesPage = () => {
                     <ListItem key={index} note={note}/>
                 ))}
             </div>
+            <AddButton />
         </div>
     )
 }
