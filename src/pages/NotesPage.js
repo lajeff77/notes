@@ -1,8 +1,18 @@
-import React from 'react'
-import notes from '../assets/data'
+import React, {useState, useEffect} from 'react'
+// import notes from '../assets/data'
 import ListItem from '../components/ListItem'
 
 const NotesPage = () => {
+    let [notes, setNotes] = useState([])
+    useEffect(() => {
+        getNotes()
+    }, []) //this one only fires onload
+
+    let getNotes = async () => {
+        let response = await fetch('http://localhost:5000/notes')
+        let data = await response.json()
+        setNotes(data)
+    }
     let noteCount = notes.length
     return (
         <div className='notes'>
