@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom'
 
 import Header from './components/Header';
-import NotesPage from './pages/NotesPage';
+import HomePage from './pages/HomePage';
 import NotePage from './pages/NotePage';
 import './App.css';
 
@@ -17,7 +17,7 @@ function App() {
         <div className="app">
           <Header />
           <Routes>
-            <Route element={<NotesPage />} path="/"/>
+            <Route element={<HomePage />} path="/"/>
             <Route element={<NotePage />} path="/note/:id"/>
           </Routes>
         </div>
