@@ -231,7 +231,7 @@ a {
   border: none;
   padding: 16px 12px;
   width: 100%;
-  height: 70vh;
+  height: 65vh;
   resize: none;
   scrollbar-width: none; /* Firefox */
 }
@@ -244,4 +244,17 @@ a {
 
 .note textarea::-webkit-scrollbar {
   display: none;
+}
+
+.note-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-main);
+  padding: 10px;
+  background-color: var(--color-lighter);
+}
+
+.note-footer p {
+  text-align: center;
 }

@@ -62,6 +62,17 @@ const NotePage = () => {
         navigate('/')
     }
 
+    let getTime = (note) => {
+        let date = new Date(note?.updated)
+        let currDate = new Date()
+        let bool = date.getDay() != currDate.getDay()
+        console.log({date});
+        console.log(`currDay.getDay() returns ${currDate.getDate()} \n
+                     date.getDate() returns ${date.getDate()} \n
+                     date.getDate() != currDate.getDate() is ${bool}`)
+        return date.getDate() == currDate.getDate() ? `today at ${date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}` : `on ${date.toLocaleDateString()}`
+    }
+
     return( 
         <div className='note'>
             <div className='note-header'>
@@ -76,7 +87,9 @@ const NotePage = () => {
                 
             </div>
             <textarea onChange={(e) =>{setNote({...note, 'body':e.target.value})}} value={note?.body}></textarea>
-            <p><em>Last Updated: {note?.updated}</em></p>
+            <div className="note-footer">
+                {id !== 'new' && (<p id="updated"><em>Last updated {getTime(note)}</em></p>)}
+            </div>
         </div>
     )
 }
