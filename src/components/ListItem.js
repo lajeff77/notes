@@ -15,9 +15,14 @@ const ListIem = ({note}) => {
     }
 
     let getContent = (note) => {
-      let title = getTitle(note);
-      let content = note.body.replaceAll( '\n', '')
-      content = content.replaceAll(title, '')
+      let lines = note.body.split('\n')
+      console.log({lines})
+      let i = 1;//start after the title
+      let content = '';
+      //check for next complete line while the string is empty and there are still more lines
+      while(i < lines?.length && content === ''){
+          content = lines[i++];
+      }
       if(content.length > 45)
        return content.slice(0,45) + '...'
       return content
