@@ -8,6 +8,7 @@ const NotePage = () => {
     let {id} = useParams();
     let navigate = useNavigate();
     let [note, setNote] = useState(null)
+    let [initialNote, setInitialNote] = useState(null)
     useEffect( () => {
         getNote()
     }, [id])//runs onload and when id is changed
@@ -18,6 +19,7 @@ const NotePage = () => {
             let response = await fetch(`http://localhost:3001/notes/${id}`)
             let data = await response.json()
             setNote(data)
+            setInitialNote(data.body)
         }
     }
 
@@ -32,13 +34,15 @@ const NotePage = () => {
     }
 
     let updateNote = async () => {
-        await fetch(`http://localhost:3001/notes/${id}/`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ ...note, 'updated': new Date() })
-        })
+        if(note.body !== initialNote){
+            await fetch(`http://localhost:3001/notes/${id}/`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ ...note, 'updated': new Date() })
+            })
+        }
     }
 
     let handleSubmit = () => {
@@ -65,12 +69,7 @@ const NotePage = () => {
     let getTime = (note) => {
         let date = new Date(note?.updated)
         let currDate = new Date()
-        let bool = date.getDay() != currDate.getDay()
-        console.log({date});
-        console.log(`currDay.getDay() returns ${currDate.getDate()} \n
-                     date.getDate() returns ${date.getDate()} \n
-                     date.getDate() != currDate.getDate() is ${bool}`)
-        return date.getDate() == currDate.getDate() ? `today at ${date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}` : `on ${date.toLocaleDateString()}`
+        return date.getDate() === currDate.getDate() ? `today at ${date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}` : `on ${date.toLocaleDateString()}`
     }
 
     return( 

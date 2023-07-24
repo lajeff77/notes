@@ -16,7 +16,6 @@ const ListIem = ({note}) => {
 
     let getContent = (note) => {
       let lines = note.body.split('\n')
-      console.log({lines})
       let i = 1;//start after the title
       let content = '';
       //check for next complete line while the string is empty and there are still more lines
