@@ -14,6 +14,11 @@ const NotesPage = () => {
         let data = await response.json()
         setNotes(data)
     }
+
+    const list = [].concat(notes)
+    .sort((a, b) => new Date(b.updated) - new Date(a.updated))
+    .map((note, index) => (<ListItem key={index} note={note}/>));
+
     let noteCount = notes.length
     return (
         <div className='notes'>
@@ -22,9 +27,7 @@ const NotesPage = () => {
                 <p className="notes-count">{noteCount}</p>
             </div>
             <div className="notes-list">
-                {notes.map((note, index) => (
-                    <ListItem key={index} note={note}/>
-                ))}
+                {list}
             </div>
             <AddButton />
         </div>
